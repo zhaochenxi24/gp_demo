@@ -1,0 +1,32 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcx.dao.IndexDao">
+
+    <!--遍历iphdr表-->
+    <select id="queryAllIpHdr" resultType="com.zcx.entity.IpHdr">
+        select * from iphdr
+    </select>
+
+    <select id="queryAllTcpHdr" resultType="com.zcx.entity.TcpHdr">
+        select * from tcphdr
+    </select>
+
+    <select id="queryAllUdpHdr" resultType="com.zcx.entity.UdpHdr">
+        select * from udphdr
+    </select>
+
+    <select id="queryAllIcmpHdr" resultType="com.zcx.entity.IcmpHdr">
+        select * from icmphdr
+    </select>
+    <select id="querySensor" resultType="com.zcx.entity.Sensor">
+        select * from sensor
+    </select>
+    <select id="queryEvent" resultType="com.zcx.entity.Event">
+      SELECT sid,cid,signature,timestamp from event
+--             SELECT sid,cid,signature,date_format(timestamp,'%Y-%m-%d')  from event
+    </select>
+    <select id="queryEventfor24h" resultType="com.zcx.entity.Event">
+        SELECT sid,cid,signature,timestamp from event
+        where `timestamp` >=(NOW() - interval 24 hour)
+    </select>
+</mapper>
+

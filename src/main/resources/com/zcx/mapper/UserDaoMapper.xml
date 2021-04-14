@@ -1,0 +1,34 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcx.dao.UserDao">
+
+
+    <!--更新-->
+    <select id="update" resultType="com.zcx.entity.User">
+        update user set username=#{username},tel=#{tel},email=#{email},password=#{password}
+        where userID = #{userID}
+    </select>
+
+    <!--遍历表-->
+    <select id="findAll" resultType="com.zcx.entity.User">
+        select * from user
+    </select>
+    <!--登录方法的实现-->
+    <select id="login" resultType="com.zcx.entity.User">
+        select userID,username,password from user
+        where username = #{username} and password = #{password}
+    </select>
+
+    <!--注册-->
+    <insert id="save" parameterType="com.zcx.entity.User">
+        insert into user value (#{userID},#{username},#{password},#{tel},#{email})
+    </insert>
+
+    <delete id="delete" parameterType="com.zcx.entity.User">
+        delete from user where userID= #{userID}
+    </delete>
+
+    <select id="find" resultType="com.zcx.entity.User">
+        select * from user where userID = #{userID}
+    </select>
+</mapper>
+

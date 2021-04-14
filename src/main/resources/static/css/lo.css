@@ -1,0 +1,11 @@
+body{
+    text-align: center;
+    padding-bottom: 70px;
+    background-color: rgb(228, 234, 247);
+}
+.footer p{
+    padding-top: -5px;
+}
+#containerbody{
+    background-color: darkgray;
+}

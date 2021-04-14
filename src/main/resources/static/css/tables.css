@@ -1,0 +1,19 @@
+.liver{
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 15px;
+    border-radius: 4px;
+}
+.tr {
+    margin-top: 25px;
+}
+#line_2 {
+    height: 350px;
+    border: 1px #eee solid;
+
+}
+#line_1_1 {
+    border: 1px #eee solid;
+    height: 150px;
+    padding: 25px;
+}

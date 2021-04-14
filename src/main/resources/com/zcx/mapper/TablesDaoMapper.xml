@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcx.dao.TablesDao">
+
+    <select id="tableEvents" resultType="com.zcx.entity.Event">
+       SELECT cid,sig_name,sig_class_name,`timestamp` from signature
+        left join event on event.signature = signature.sig_id
+ 				right join sig_class on sig_class.sig_class_id = signature.sig_class_id
+ 				 ORDER BY TIMESTAMP DESC LIMIT 8
+
+--             SELECT sid,cid,signature,date_format(timestamp,'%Y-%m-%d')  from event
+    </select>
+    <select id="tableIp" resultType="com.zcx.entity.IpHdr">
+      SELECT cid,ip_ver,ip_id,ip_src FROM iphdr
+       ORDER BY cid DESC
+        LIMIT 12
+
+--             SELECT sid,cid,signature,date_format(timestamp,'%Y-%m-%d')  from event
+    </select>
+    <select id="tableSensor" resultType="com.zcx.entity.Sensor">
+       SELECT sid,hostname,last_cid, detail_text FROM sensor
+        LEFT JOIN detail on detail.detail_type = sensor.detail
+--             SELECT sid,cid,signature,date_format(timestamp,'%Y-%m-%d')  from event
+    </select>
+
+    <select id="ipInfo" resultType="com.zcx.entity.IpHdr">
+       SELECT
+	    *
+        FROM
+	    iphdr
+        ORDER BY
+	    cid DESC
+    </select>
+    <select id="eventInfo" resultType="com.zcx.entity.Event">
+        SELECT * from signature
+        left join event on event.signature = signature.sig_id
+ 				right join sig_class on sig_class.sig_class_id = signature.sig_class_id
+ 				ORDER BY timestamp DESC
+    </select>
+    <select id="sensorInfo" resultType="com.zcx.entity.Sensor">
+       SELECT * FROM sensor
+    </select>
+
+</mapper>

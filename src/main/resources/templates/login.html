@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 首页 </title>
+</head>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/font-icon-style.css}">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<link rel="stylesheet" th:href="@{/css/lo.css}">
+
+<body id="login">
+<!-- 内容开始  -->
+<div class="container col-lg-4  col-md-4 col-sm-6 col-xs-12">
+    <!-- 页面头部 开始  -->
+    <div class="page-header">
+        <h1 class="col-xs-12">入侵监控系统 </h1><span>管理员登录</span>
+    </div>
+
+    <!-- 页面头部 结束 -->
+
+    <!-- 页面 内容 开始  -->
+    <div class="page-box">
+        <form th:action="@{/login}" method="get">
+            <!--如果MSG的值为空，不显示数据-->
+            <div class="form-group">
+                <div class="alert alert-danger" th:if="${not #strings.isEmpty(errorMsg)}" th:text="${errorMsg}"></div>
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
+                           name="username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1"
+                           name="password">
+                </div>
+            </div>
+
+
+            <div class="col-md-6  col-lg-6  col-md-6 col-xs-6  ">
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+
+
+            <div class="col-md-6  col-lg-6  col-md-6 col-xs-6">
+                <button type="submit" class="btn btn-primary">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 页面 内容 结束  -->
+<!-- 页面 标注 开始  -->
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <p> 若发生错误请及时联系<a>管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本1.01</p>
+</div>
+<!-- 页面 标注 结束  -->
+
+
+<!-- 内容结束  -->
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/jquery.min.js}" type="text/javascript" charset="utf-8" rel="stylesheet"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript" charset="utf-8" rel="stylesheet"></script>
+
+</body>
+
+</html>

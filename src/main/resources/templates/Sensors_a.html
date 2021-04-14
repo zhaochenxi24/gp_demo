@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 首页 </title>
+</head>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/lo.css}">
+<link rel="stylesheet" th:href="@{/css/index.css}">
+
+<body>
+<script>
+    var url = window.location.href;
+    setInterval(function () {
+        $("#refresh").load(location.href + " #refresh >*", "");
+    }, 1500);
+</script>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/index}">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a th:href="@{/charts}">图形数据</a></li>
+                <li><a th:href="@{/tables}">数据表单</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">网络适配器<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Sensors/a">Wlan 2</a></li>
+                        <li><a href="/Sensors/e">Ethernet 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}">注销</a></li>
+                <li><a th:href="@{/findAll}">管理员表</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="container-fluid  liver">
+
+        <div class="row tr" >
+            <div class="col-sm-12 col-sm-8 flel">
+                <div id="line_2">
+                    <p class="bg-danger">当前告警事件</p>
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th class="text-center"> 当前告警</th>
+                                <th class="text-center">时间</th>
+                            </tr>
+                            </thead>
+                            <tbody  id="refresh">
+                            <tr th:each="e:${eventList}">
+                                <td>
+                                    <span th:text="${e.sig_name}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${e.timestamp}"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6 col-sm-4 flel">
+                <div id="line_2">
+                    <div id="table1" style="height: 100%"></div>
+                </div>
+                <p class="bg-danger">当前网络设备告警事件前5</p>
+            </div>
+        </div>
+
+        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+<!--        <div class="row tr">-->
+<!--            <div class="col-sm-6 col-sm-4 flel">-->
+<!--                <div id="line_2">-->
+<!--                    <div id="table4" style="height: 100%"></div>-->
+<!--                </div>-->
+<!--                <p class="bg-primary">近3天告警的数量</p>-->
+<!--            </div>-->
+<!--            <div class="col-sm-6 col-sm-4 flel">-->
+<!--                <div id="line_2">-->
+<!--                    <div id="table5" style="height: 100%"></div>-->
+<!--                </div>-->
+<!--                <p class="bg-danger">目前威胁等级</p>-->
+<!--            </div>-->
+<!--            <div class="col-sm-6 col-sm-4 flel">-->
+<!--                <div id="line_2">-->
+<!--                    <div id="table6" style="height: 100%"></div>-->
+<!--                </div>-->
+<!--                <p class="bg-primary">告警事件前3的主机地址</p>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!-- 流式栅栏尾 -->
+    </div>
+</div>
+<!--
+            底部固定————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <p> 若发生错误请及时联系<a>管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本1.01</p>
+</nav>
+
+
+<script th:src="@{/js/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/echarts.min.js}"></script>
+
+<!--表一数据-->
+<input type="hidden" th:value="${k1}" id="k1"/>
+<input type="hidden" th:value="${k2}" id="k2"/>
+<input type="hidden" th:value="${k3}" id="k3"/>
+<input type="hidden" th:value="${k4}" id="k4"/>
+<input type="hidden" th:value="${k5}" id="k5"/>
+<input type="hidden" th:value="${v1}" id="v1"/>
+<input type="hidden" th:value="${v2}" id="v2"/>
+<input type="hidden" th:value="${v3}" id="v3"/>
+<input type="hidden" th:value="${v4}" id="v4"/>
+<input type="hidden" th:value="${v5}" id="v5"/>
+
+<!-- 表———————————————————————————————————————————————————————————————————————————— -->
+<script type="text/javascript">
+    // 表一————————————————————————————————————————————————————————————————————————————————————————————————————————
+    var charts = []; //定义一个全局变量
+    var dom = document.getElementById("table1");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var k1 = $("#k1").val();
+    var k2 = $("#k2").val();
+    var k3 = $("#k3").val();
+    var k4 = $("#k4").val();
+    var k5 = $("#k5").val();
+    var v1 = $("#v1").val();
+    var v2 = $("#v2").val();
+    var v3 = $("#v3").val();
+    var v4 = $("#v4").val();
+    var v5 = $("#v5").val();
+    var option;
+
+
+
+    option = {
+        title: {
+            text: '前五告警事件',
+            left: 'center'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '50%',
+                top:'80px',
+                font:'10px',
+                data: [
+                    {value: v1, name: k1},
+                    {value: v2, name: k2},
+                    {value: v3, name: k3},
+                    {value: v4, name: k4},
+                    {value: v5, name: k5}
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+    charts.push(myChart); //存入数组
+
+
+    //// 表二————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    //// 表三————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    var dom = document.getElementById("table3");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var h1 = $("#host1").val();
+    var h2 = $("#host2").val();
+    var h3 = $("#host3").val();
+    var hc1 = $("#hostcount1").val();
+    var hc2 = $("#hostcount2").val();
+    var hc3 = $("#hostcount3").val();
+
+    var option;
+
+
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+
+        xAxis: [
+            {
+
+                type: 'category',
+                data: [h1, h2,h3],
+                axisTick: {
+                    alignWithLabel: true
+                }
+
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '告警数量',
+                type: 'bar',
+                barWidth: '60%',
+                data: [hc1, hc2, hc3]
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+    charts.push(myChart); //存入数组
+
+    // 表4————————————————————————————————————————————————————————————————————————————————————————————————————————
+    var dom = document.getElementById("table4");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var option;
+    var c1 = $("#count1").val();
+    var c2 = $("#count2").val();
+    var c3 = $("#count3").val();
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['today', '-1day', '-2day']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [2, 24, 28],
+            type: 'line',
+            smooth: true
+        }]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+    charts.push(myChart); //存入数组
+
+
+    //// 表5————————————————————————————————————————————————————————————————————————————————————————————————————————
+    var dom = document.getElementById("table5");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var option;
+    var e24 = $("#eventfor24").val();
+
+
+    option = {
+        series: [{
+            type: 'gauge',
+            startAngle: 180,
+            endAngle: 0,
+            min: 0,
+            max: 1,
+            splitNumber: 8,
+            axisLine: {
+                lineStyle: {
+                    width: 6,
+                    color: [
+                        [0.25, '#7CFFB2'],
+                        [0.5, '#58D9F9'],
+                        [0.75, '#FDDD60'],
+                        [1, '#FF6E76']
+                    ]
+                }
+            },
+            pointer: {
+                icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                length: '90%',
+                width: 5,
+                offsetCenter: [0, '20%'],
+                itemStyle: {
+                    color: 'auto'
+                }
+            },
+            axisTick: {
+                length: 12,
+                lineStyle: {
+                    color: 'auto',
+                    width: 2
+                }
+            },
+            splitLine: {
+                length: 20,
+                lineStyle: {
+                    color: 'auto',
+                    width: 5
+                }
+            },
+            axisLabel: {
+                color: '#464646',
+                fontSize: 15,
+                distance: -55,
+                formatter: function (value) {
+                    if (value === 0.875) {
+                        return 'ultra';
+                    } else if (value === 0.625) {
+                        return 'high';
+                    } else if (value === 0.375) {
+                        return 'mid';
+                    } else if (value === 0.125) {
+                        return 'low';
+                    }
+                }
+            },
+            title: {
+                offsetCenter: [0, '40%'],
+                fontSize: 15
+            },
+            detail: {
+                fontSize: 15,
+                offsetCenter: [0, '60%'],
+                valueAnimation: true,
+                formatter: function (value) {
+                    return Math.round(value * 100) + 'Alerts';
+                },
+                color: 'auto'
+            },
+            data: [{
+                value: 2,
+                name: 'Risk assessment'
+            }]
+        }]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+    charts.push(myChart); //存入数组
+    //// 表6————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+    var dom = document.getElementById("table6");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var c1 = $("#ip1").val();
+    var c2 = $("#ip2").val();
+    var c3 = $("#ip3").val();
+    var n1 = $("#num1").val();
+    var n2 = $("#num2").val();
+    var n3 = $("#num3").val();
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['Events']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: ['192.168.43.1', '192.168.1.1', '117.34.37.35']
+        },
+        series: [
+            {
+                name: 'Events',
+                type: 'bar',
+                data: [143, 25, 1]
+            },
+        ]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+    charts.push(myChart); //存入数组
+    //在所有图表之后
+    window.onresize = function () {
+        for (var i = 0; i < charts.length; i++) {
+            charts[i].resize();
+        }
+    };
+</script>
+</body>
+
+</html>

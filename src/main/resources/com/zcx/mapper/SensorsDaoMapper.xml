@@ -1,0 +1,51 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcx.dao.SensorsDao">
+
+    <select id="getEventInfo_a" resultType="com.zcx.entity.Event">
+SELECT
+	*
+FROM
+	signature
+LEFT JOIN EVENT ON EVENT .signature = signature.sig_id
+RIGHT JOIN sig_class ON sig_class.sig_class_id = signature.sig_class_id
+WHERE
+	sid = 1
+ORDER BY
+	cid DESC
+LIMIT 9
+    </select>
+	<select id="getEventInfo_e" resultType="com.zcx.entity.Event">
+SELECT
+	*
+FROM
+	signature
+LEFT JOIN EVENT ON EVENT .signature = signature.sig_id
+RIGHT JOIN sig_class ON sig_class.sig_class_id = signature.sig_class_id
+WHERE
+	sid = 5
+ORDER BY
+	cid DESC
+LIMIT 9
+    </select>
+    <select id="getAllEvent1" resultType="com.zcx.entity.Event">
+SELECT
+	*
+FROM
+	signature
+LEFT JOIN EVENT ON EVENT .signature = signature.sig_id
+RIGHT JOIN sig_class ON sig_class.sig_class_id = signature.sig_class_id
+WHERE
+	sid = 1
+    </select><select id="getAllEvent5" resultType="com.zcx.entity.Event">
+SELECT
+	*
+FROM
+	signature
+LEFT JOIN EVENT ON EVENT .signature = signature.sig_id
+RIGHT JOIN sig_class ON sig_class.sig_class_id = signature.sig_class_id
+WHERE
+	sid = 5
+    </select>
+
+</mapper>
+

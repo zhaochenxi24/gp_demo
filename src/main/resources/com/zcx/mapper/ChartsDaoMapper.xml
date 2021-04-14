@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcx.dao.ChartsDao">
+
+    <!--遍历iphdr表-->
+    <!--只查询当天的字段-->
+    <select id="queryEventfor24h" resultType="com.zcx.entity.Event">
+        SELECT sid,cid,signature,timestamp from event
+        where TO_DAYS(`timestamp`)=TO_DAYS(NOW());
+    </select>
+    <select id="queryEventName" resultType="com.zcx.entity.Event">
+       SELECT cid,sig_name,timestamp from event
+        LEFT JOIN signature on signature.sig_id = event.signature
+        where `timestamp` >=(NOW() - interval 72 hour)
+    </select>
+    <select id="queryCountHostname" resultType="com.zcx.entity.Sensor">
+           SELECT last_cid, hostname from sensor
+    </select>
+
+    <select id="queryAllEvent" resultType="com.zcx.entity.Event">
+        SELECT * from signature
+        left join event on event.signature = signature.sig_id
+ 				right join sig_class on sig_class.sig_class_id = signature.sig_class_id
+    </select>
+
+    <select id="queryAllEventA" resultType="com.zcx.entity.Event">
+        SELECT * from signature
+        left join event on event.signature = signature.sig_id
+ 				right join sig_class on sig_class.sig_class_id = signature.sig_class_id
+ 				where sid = 1
+    </select>
+    <select id="queryAllEventE" resultType="com.zcx.entity.Event">
+        SELECT * from signature
+        left join event on event.signature = signature.sig_id
+ 				right join sig_class on sig_class.sig_class_id = signature.sig_class_id
+ 				where sid = 5
+    </select>
+
+    <select id="queryAllIp" resultType="com.zcx.entity.IpHdr">
+        select * from iphdr
+    </select>
+</mapper>
+

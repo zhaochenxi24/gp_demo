@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 首页 </title>
+</head>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/lo.css}">
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/index}">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a th:href="@{/charts}">图形数据</a></li>
+                <li><a th:href="@{/tables}">数据表单</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">网络适配器<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Sensors/a">Wlan 2</a></li>
+                        <li><a href="/Sensors/e">Ethernet 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}">注销</a></li>
+                <li><a th:href="@{/findAll}">管理员表</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container" style="background-color: white">
+    <div class="container-fluid  liver">
+
+        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+        <div class="row tr">
+            <div class="col-sm-6 col-sm-4 flel">
+                <div id="line_2">
+                    <p class="bg-primary">事件统计表</p>
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered nth-child">
+                            <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">特征类型</th>
+                                <th class="text-center">记录时间</th>
+                                <th class="text-center">告警事件</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="" th:each="events:${tableEvents}">
+                                <th scope="row">
+                                    <span th:text="${events.cid}"></span>
+                                </th>
+                                <td>
+                                    <span th:text="${events.sig_class_name}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${events.timestamp}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${events.sig_name}"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li><a th:href="@{/eventinfo}">详表</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-4 flel">
+                <div id="line_2">
+                    <p class="bg-danger">IP包头信息</p>
+                    <table class="table table-condensed table-bordered nth-child">
+                        <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">协议版本</th>
+                            <th class="text-center">数据包标识符</th>
+                            <th class="text-center">ip源地址</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ips:${tableIp}">
+                            <th scope="row">
+                                <span th:text="${ips.cid}"></span>
+                            </th>
+                            <td>
+                                <span th:text="${ips.ip_ver}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${ips.ip_id}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${ips.s_ipsrc}"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li><a th:href="@{/ipinfo}">详表</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-4 flel">
+                <div id="line_2">
+                    <p class="bg-primary">探测设备</p>
+                    <table class="table table-condensed table-bordered nth-child">
+                        <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">记录网卡</th>
+                            <th class="text-center">检测级别</th>
+                            <th class="text-center">警报数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sensors:${tableSensor}">
+                            <th scope="row" class="text-center">
+                                <span th:text="${sensors.sid}"></span>
+                            </th>
+                            <td>
+                                <span th:text="${sensors.hostname}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${sensors.detail_text}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${sensors.getLast_cid()}"></span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--         流式栅栏尾 -->
+    </div>
+</div>
+<!--
+            底部固定————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <p> 若发生错误请及时联系<a>管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本1.01</p>
+</nav>
+
+<script th:src="@{/js/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/echarts.min.js}"></script>
+</body>
+
+</html>

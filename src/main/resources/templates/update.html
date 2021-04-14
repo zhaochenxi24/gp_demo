@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 管理员目录 </title>
+</head>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/font-icon-style.css}">
+<link rel="stylesheet" th:href="@{/css/index.css}">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+
+<body>
+
+
+<!--
+            导航栏————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+<nav class="navbar navbar-default" style="z-index: 99">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/index}">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a th:href="@{/charts}">图形数据</a></li>
+                <li><a th:href="@{/tables}">数据表单</a></li>
+            </ul>
+<!--            <form class="navbar-form navbar-left">-->
+<!--                <div class="form-group">-->
+<!--                    <input type="text" class="form-control" placeholder="Search">-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-default">Submit</button>-->
+<!--            </form>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}">注销</a></li>
+                <li><a th:href="@{/findAll}">管理员表</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--
+            主体————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+
+<div class="container col-lg-4  col-md-4 col-sm-6 col-xs-12">
+    <!-- 页面头部 开始  -->
+    <div class="page-header">
+        <h1 class="col-xs-12">管理员更新 </h1>
+    </div>
+
+    <!-- 页面头部 结束 -->
+
+    <!-- 页面 内容 开始  -->
+    <div class="page-box">
+        <form th:action="@{update}" method="get">
+            <!--如果MSG的值为空，不显示数据-->
+            <div class="form-group">
+                <input type="hidden" th:value="${user.userID}" name="userID">
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                    <input type="text" class="form-control" th:value="${user.username}" aria-describedby="basic-addon1"
+                           name="username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-phone-alt"></span>
+                        </span>
+                    <input type="text" class="form-control" th:value="${user.tel}" aria-describedby="basic-addon1"
+                           name="tel">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                    <input type="text" class="form-control" th:value="${user.email}" aria-describedby="basic-addon1"
+                           name="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                        <span class="input-group-addon" aria-describedby="basic-addon1">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                    <input type="text" class="form-control" placeholder="请输入新密码" aria-describedby="basic-addon1"
+                           name="password">
+                </div>
+            </div>
+
+
+            <div class="col-md-6  col-lg-6  col-md-6 col-xs-6  ">
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+
+
+            <div class="col-md-6  col-lg-6  col-md-6 col-xs-6">
+                <button type="submit" class="btn btn-primary">更新</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--尾栏-->
+
+
+<!--
+                底部固定————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <p style="text-align: center"> 若发生错误请及时联系<a>管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本1.01</p>
+</nav>
+
+
+<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

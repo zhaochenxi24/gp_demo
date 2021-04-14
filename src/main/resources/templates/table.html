@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 管理员目录 </title>
+</head>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/font-icon-style.css}">
+<link rel="stylesheet" th:href="@{/css/index.css}">
+<body>
+
+
+<!--
+            导航栏————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/index}">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a th:href="@{/charts}">图形数据</a></li>
+                <li><a th:href="@{/tables}">数据表单</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">网络适配器<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Sensors/a">Wlan 2</a></li>
+                        <li><a href="/Sensors/e">Ethernet 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+<!--                        <form class="navbar-form navbar-left">-->
+<!--                            <div class="form-group">-->
+<!--                                <input type="text" class="form-control" placeholder="Search">-->
+<!--                            </div>-->
+<!--                            <button type="submit" class="btn btn-default">Submit</button>-->
+<!--                        </form>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}">注销</a></li>
+                <li><a href="#">管理员表</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--
+            主体————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed table-bordered nth-child ">
+
+            <thead>
+            <tr>
+                <th>管理员</th>
+                <th>联系电话</th>
+                <th>邮箱</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${users}">
+                <td>
+                    <span th:text="${user.username}"></span>
+                </td>
+                <td>
+                    <span th:text="${user.tel}"></span>
+                </td>
+                <td>
+                    <span th:text="${user.email}"></span>
+                </td>
+                <td>
+                    <span><a class="btn btn-default" th:href="@{/delete(userID=${user.userID})}">删除</a></span>
+                    <span><a class="btn btn-default" th:href="@{/find(userID=${user.userID})}">更新</a></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--
+                底部固定————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-->
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <p style="text-align: center"> 若发生错误请及时联系<a>管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本1.01</p>
+</nav>
+
+
+<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>
